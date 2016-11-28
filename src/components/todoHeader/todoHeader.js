@@ -7,6 +7,10 @@ export default {
     methods: {
         handlerKeyUp() { 
             const value = this.message;
+
+            if (!value.length){ 
+                return false;
+            }
             
             let newTodoItem = {
                 text: value,
@@ -14,7 +18,7 @@ export default {
             };
             
             this.$emit('addItem', newTodoItem);
-            // console.log(newTodoItem, 123);
+            
             this.message = '';
 
         }

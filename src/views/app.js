@@ -3,14 +3,11 @@ import todoMain from '../components/todoMain/todoMain.vue';
 import todoFooter from '../components/todoFooter/todoFooter.vue';
 import LocalDB from '../components/localDB';
 
-// var Bus = new Vue();
-
-
 export default {
     data: function() {
         return {
             todos: '',
-            isAllChecked: false
+            isAllDone: false
         }
     },
     components: {
@@ -28,13 +25,6 @@ export default {
         // Bus.$on('stateChange')
     },
 
-    // watch: { 
-    //     todos(){
-    //         console.log('data changed!!')
-
-    //         this.db.set('todos', this.todos);
-    //     }
-    // },
     methods: {
         addNewItem(item) {
             this.todos.push(item);
@@ -53,7 +43,7 @@ export default {
         },
 
         todoStatusChange(index, item) {
-
+            //按照index删除item
             if (!item) {
                 this.deleteTodo(index);
 
@@ -63,30 +53,32 @@ export default {
             this.todos[index] = item;
 
             this.save();
-            this.checkChanged();
+            
+            this.checkAllDone();
         },
 
-        checkChanged() {
+        checkAllDone() {
 
             if (this.todos.every(todo => todo.isDone)) {
-                this.isAllChecked = true;
+                this.isAllDone = true;
             } else {
-                this.isAllChecked = false;
+                this.isAllDone = false;
             }
-
-            console.log(this.isAllChecked);
 
         },
 
         toggleAllChecked() {
 
-            this.checkChanged();
+            this.checkAllDone();
             
+            //isDone 取相反值
             this.todos.map((todo) => {
-                todo.isDone = !this.isAllChecked;
+                todo.isDone = !this.isAllDone;
 
                 return todo;
-            })
+            });
+
+            this.save();
 
         },
 

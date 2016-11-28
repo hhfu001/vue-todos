@@ -5,6 +5,4 @@
         <button class="fr" @click="delTodo">删除</button>
     </li>
 </template>
-<script src="./todoItem.js">
-    
-</script>
+<script src="./todoItem.js"></script>
