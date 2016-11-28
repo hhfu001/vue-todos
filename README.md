@@ -1,6 +1,10 @@
 # vue-todos
 
 > A Vue.js todos demo project
+---
+效果图预览
+
+![alt](src/assets/view.png)
 
 ## Build Setup
 
