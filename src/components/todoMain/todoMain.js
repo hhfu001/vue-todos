@@ -1,5 +1,5 @@
 import todoItem from '../todoItem/todoItem.vue';
-import LocalDB from '../localDB';
+// import LocalDB from '../localDB';
 
 
 export default {
@@ -8,7 +8,7 @@ export default {
         todoItem
     },
     mounted() { 
-        this.db = new LocalDB('todos');
+        // this.db = new LocalDB('todos');
 
     },
     methods: {

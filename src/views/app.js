@@ -51,10 +51,10 @@ export default {
             this.save();
 
         },
-        
-        todoChange(index, item) { 
 
-            if (!item){ 
+        todoStatusChange(index, item) {
+
+            if (!item) {
                 this.deleteTodo(index);
 
                 return;
@@ -63,9 +63,39 @@ export default {
             this.todos[index] = item;
 
             this.save();
+            this.checkChanged();
         },
 
-        save() { 
+        checkChanged() {
+
+            if (this.todos.every(todo => todo.isDone)) {
+                this.isAllChecked = true;
+            } else {
+                this.isAllChecked = false;
+            }
+
+            console.log(this.isAllChecked);
+
+        },
+
+        toggleAllChecked() {
+
+            this.checkChanged();
+            
+            this.todos.map((todo) => {
+                todo.isDone = !this.isAllChecked;
+
+                return todo;
+            })
+
+        },
+
+        cleanDone() {
+            this.todos = this.todos.filter(todo => !todo.isDone);
+            this.save();
+        },
+
+        save() {
 
             this.db.set('todos', this.todos);
         }
